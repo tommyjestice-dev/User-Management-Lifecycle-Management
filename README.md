@@ -1,6 +1,6 @@
 # User Access Lifecycle Manager
 
-A simple Python project that simulates basic Identity and Access Management (IAM) processes for onboarding, transferring, and offboarding users—just like an IT or security team would do in a real company.
+Built project that simulates basic Identity and Access Management (IAM) processes for onboarding, transferring, and offboarding users—just like an IT or security team would do in a real company.
 
 ---
 
