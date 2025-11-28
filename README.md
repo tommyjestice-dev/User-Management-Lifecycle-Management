@@ -1,56 +1,106 @@
-# User Access Lifecycle Manager
+User Access Lifecycle Manager
 
-Built project that simulates basic Identity and Access Management (IAM) processes for onboarding, transferring, and offboarding users—just like an IT or security team would do in a real company.
+A Python-based project that simulates a real-world Identity and Access Management (IAM) workflow for onboarding, transferring, and offboarding users. This mirrors the Joiner–Mover–Leaver processes used by IT, IAM, and Security teams in enterprise environments.
 
----
+What This Project Does
 
-##  What This Project Does
+Assigns permissions to new hires based on role (RBAC)
 
-- **Assigns permissions** to users based on their role when they join the company
-- **Updates permissions** when users move to a new role or department
-- **Revokes access** when users leave the company
-- **Logs all access changes** in a structured JSON file for easy auditing and review
+Updates permissions when users change departments or roles
 
----
+Revokes all access when users leave the company
 
-##  How It Works
+Writes a complete audit log of all access actions to a JSON file
 
-- Users are defined in a Python list with their name, status (Joiner, Mover, Leaver), and role (Engineer, HR, Finance, etc.)
-- The script automatically:
-  - Assigns the right permissions for new hires (Joiners)
-  - Changes permissions if an employee changes roles (Movers)
-  - Removes all access for employees who leave (Leavers)
-- Every action is **logged with a timestamp** in `access_log.json`
+This project demonstrates core IAM concepts used in identity systems such as Microsoft Entra ID, Okta, and similar platforms.
 
----
+How It Works
 
-##  Why I Built This
+Each user is defined with:
 
-I’m learning core IAM concepts and practicing automation for real-world tech jobs.  
-This project helps demonstrate my understanding of:
-- **Role-Based Access Control (RBAC)**
-- **User provisioning and deprovisioning**
-- **Lifecycle management (Joiner, Mover, Leaver)**
-- **Audit logging for compliance**
+name
 
----
+status → Joiner, Mover, or Leaver
 
-##  Project Structure
+role → Engineer, HR, Finance, etc.
+
+The system processes each lifecycle state:
+
+Joiner (New Hire)
+
+Assigns role-appropriate permissions
+
+Logs the provisioning event with a timestamp
+
+Mover (Internal Transfer)
+
+Removes old role permissions
+
+Adds new role permissions
+
+Logs the role change and updated access
+
+Leaver (Offboarding)
+
+Removes all permissions
+
+Logs the deprovisioning event for audit purposes
+
+All access activity is written to access_log.json.
+
+IAM Concepts Demonstrated
+
+Role-Based Access Control (RBAC)
+
+Least privilege
+
+Joiner–Mover–Leaver lifecycle management
+
+User provisioning and deprovisioning
+
+Access change auditing and compliance logging
+
+Basic separation of duties
+
+Zero Trust-aligned access logic (explicit grant and removal)
+
+These are foundational practices in identity engineering and identity governance.
+
+Architecture Overview
+
+This is a simple, text-based outline of how the project operates:
+
+main.py reads the list of users and their lifecycle state
+
+It looks up the correct permissions based on role definitions in roles.py
+
+It uses helper functions in utils.py to generate timestamps and write logs
+
+All access changes are written to access_log.json as a basic audit trail
+
+Project Structure
 user-access-lifecycle-manager/
-├── main.py # Main script to process users
-├── roles.py # Role and permission definitions
-├── utils.py # Logging and timestamp functions
-├── access_log.json # Log of all access changes (auto-generated)
-└── README.md # This file!
+│
+├── main.py            # Processes Joiner/Mover/Leaver workflow
+├── roles.py           # Role-to-permission definitions (RBAC)
+├── utils.py           # Timestamp and logging helpers
+├── access_log.json    # Auto-generated audit log
+└── README.md
 
-##  How To Use
-1. Edit the 'users' list in 'main.py' to add or change users.
-2. Run the script with: python3 main.py or just run the script using the "play" button in the IDE that you are using.
-3. See output messages in your terminal.
-4. Check the 'access_log.json file to review all changes and timestamps.
+How To Use
 
-##  Example Log Output
-```json
+Modify the users list in main.py to add or change users.
+
+Run the script:
+
+python3 main.py
+
+
+Review the access actions in the terminal.
+
+Open access_log.json to audit all changes with timestamps.
+
+Example Log Output
 [
   {
     "name": "Tommy",
@@ -64,3 +114,16 @@ user-access-lifecycle-manager/
   }
 ]
 
+Why I Built This
+
+I am developing a deeper understanding of identity fundamentals and access governance by simulating how organizations manage user state changes. This project demonstrates skills relevant to:
+
+IAM Analyst
+
+Identity Engineer
+
+Technical Support Engineer (Identity-focused)
+
+Security Analyst (Identity and Access Control)
+
+It shows practical knowledge of identity workflows, RBAC, access automation, and audit-ready logging.
